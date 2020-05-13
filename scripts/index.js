@@ -99,7 +99,7 @@ loader.load(
 
     // Set the models initial scale
     theModel.scale.set(10, 10, 10);
-    // theModel.rotation.y = Math.PI;
+    theModel.rotation.y = 12;
 
     // Offset the y position a bit
     theModel.position.y = -1;
