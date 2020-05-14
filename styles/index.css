@@ -6,6 +6,7 @@ html {
   font-family: "Raleway", sans-serif;
   font-size: 14px;
   color: #444444;
+  background-color: #f1f1f1;
 }
 * {
   touch-action: manipulation;

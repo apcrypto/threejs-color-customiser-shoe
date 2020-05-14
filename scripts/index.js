@@ -32,7 +32,7 @@ const colors = [
   },
 ];
 
-var activeOption = "Headband";
+var activeOption = "laces";
 var cameraFar = 5;
 var theModel;
 const MODEL_PATH = "./assets/nike.glb";
@@ -73,10 +73,14 @@ const INITIAL_MTL = new THREE.MeshPhongMaterial({
 });
 
 const INITIAL_MAP = [
-  { childID: "Headband", mtl: INITIAL_MTL },
-  { childID: "Pad", mtl: INITIAL_MTL },
-  { childID: "Adjuster", mtl: INITIAL_MTL },
-  { childID: "Speaker", mtl: INITIAL_MTL },
+  { childID: "laces", mtl: INITIAL_MTL },
+  { childID: "trim", mtl: INITIAL_MTL },
+  { childID: "side", mtl: INITIAL_MTL },
+  { childID: "Vamp", mtl: INITIAL_MTL },
+  { childID: "stitch", mtl: INITIAL_MTL },
+  { childID: "rear_sole", mtl: INITIAL_MTL },
+  { childID: "Toe", mtl: INITIAL_MTL },
+  { childID: "above_sole", mtl: INITIAL_MTL },
 ];
 
 // Init the object loader
@@ -98,12 +102,14 @@ loader.load(
     LOADER.remove();
 
     // Set the models initial scale
-    theModel.scale.set(1.1, 1.1, 1.1);
+    theModel.scale.set(1, 1, 1);
     theModel.rotation.y = 12;
     theModel.rotation.x = 0.09;
 
     // Offset the y position a bit
     theModel.position.y = -1;
+
+    console.log(theModel.children[1].children[36].children);
 
     // Set initial textures
     for (let object of INITIAL_MAP) {
