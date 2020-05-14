@@ -35,7 +35,7 @@ const colors = [
 var activeOption = "Headband";
 var cameraFar = 5;
 var theModel;
-const MODEL_PATH = "./assets/converse.glb";
+const MODEL_PATH = "./assets/nike.glb";
 
 const BACKGROUND_COLOR = 0xf1f1f1;
 // const BACKGROUND_COLOR = 0xffffff;
@@ -98,8 +98,9 @@ loader.load(
     LOADER.remove();
 
     // Set the models initial scale
-    theModel.scale.set(10, 10, 10);
+    theModel.scale.set(1.1, 1.1, 1.1);
     theModel.rotation.y = 12;
+    theModel.rotation.x = 0.09;
 
     // Offset the y position a bit
     theModel.position.y = -1;
