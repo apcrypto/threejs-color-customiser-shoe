@@ -52,7 +52,7 @@ const colors = [
 var activeOption = "laces";
 var cameraFar = 5;
 var theModel;
-const MODEL_PATH = "./assets/nike.glb";
+const MODEL_PATH = "./assets/shoe.glb";
 
 const BACKGROUND_COLOR = 0xf1f1f1;
 // const BACKGROUND_COLOR = 0xffffff;
@@ -107,8 +107,11 @@ loader.load(
   MODEL_PATH,
   function(gltf) {
     theModel = gltf.scene;
-
+    // console.log(gltf.scene.children[1].children[1]);
+    // console.log(gltf.scene.children[1].children[7]);
+    // console.log(gltf.scene.children[1].children[11]);
     theModel.traverse(o => {
+      console.log(o);
       if (o.isMesh) {
         o.castShadow = true;
         o.receiveShadow = true;
@@ -126,7 +129,7 @@ loader.load(
     // Offset the y position a bit
     theModel.position.y = -1;
 
-    console.log(theModel.children[1].children[36].children);
+    // console.log(theModel.children[1].children[36].children);
 
     // Set initial textures
     for (let object of INITIAL_MAP) {
@@ -150,6 +153,7 @@ function initColor(parent, type, mtl) {
         o.material = mtl;
         o.nameID = type; // Set a new property to identify this object
         // o.material.alphaTest = 0.5;
+        // console.log(o.material);
       }
     }
   });
@@ -251,7 +255,7 @@ for (const option of options) {
 }
 
 function selectOption(e) {
-  console.log(e);
+  // console.log(e);
   let option = e.target;
   activeOption = e.target.dataset.option;
   for (const otherOption of options) {
@@ -288,7 +292,7 @@ function selectSwatch(e) {
       shininess: color.shininess ? color.shininess : 10
     });
   }
-  console.log(theModel, activeOption, new_mtl);
+  // console.log(theModel, activeOption, new_mtl);
   setMaterial(theModel, activeOption, new_mtl);
 }
 
@@ -297,6 +301,7 @@ function setMaterial(parent, type, mtl) {
     if (o.isMesh && o.nameID != null) {
       if (o.nameID == type) {
         o.material = mtl;
+        // console.log("type", type);
       }
     }
   });
