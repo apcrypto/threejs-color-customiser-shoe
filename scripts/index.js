@@ -4,32 +4,49 @@ const TRAY = document.getElementById("js-tray-slide");
 let loaded = false;
 const colors = [
   {
-    color: "03214A",
+    texture: "./assets/mat_suede_charcoal.jpg",
+    size: [3, 3, 3],
+    shininess: 0
   },
   {
-    color: "D4AF37",
+    texture: "./assets/mat_suede_dressblue.jpg",
+    size: [3, 3, 3],
+    shininess: 0
   },
   {
-    color: "FFB6C1",
+    texture: "./assets/mat_suede_glazedginger.jpg",
+    size: [3, 3, 3],
+    shininess: 0
   },
   {
-    color: "FC0D2B",
+    texture: "./assets/mat_suede_racing_red.jpg",
+    size: [3, 3, 3],
+    shininess: 0
   },
   {
-    color: "131417",
+    color: "63c7e5"
   },
   {
-    color: "374047",
+    color: "df73b2"
   },
   {
-    color: "5f6e78",
+    color: "f77036"
   },
   {
-    color: "7f8a93",
+    color: "fff200"
   },
   {
-    color: "D0D2D1",
+    color: "86cc8c"
   },
+  {
+    color: "a26ab2"
+  },
+  {
+    color: "3b45a3"
+  },
+  {
+    color: "fee2e0"
+  }
 ];
 
 var activeOption = "laces";
@@ -69,7 +86,7 @@ const INITIAL_MTL = new THREE.MeshPhongMaterial({
   color: 0xf1f1f1,
   shininess: 10,
   transparent: true,
-  opacity: 1,
+  opacity: 1
 });
 
 const INITIAL_MAP = [
@@ -80,7 +97,7 @@ const INITIAL_MAP = [
   { childID: "stitch", mtl: INITIAL_MTL },
   { childID: "rear_sole", mtl: INITIAL_MTL },
   { childID: "Toe", mtl: INITIAL_MTL },
-  { childID: "above_sole", mtl: INITIAL_MTL },
+  { childID: "above_sole", mtl: INITIAL_MTL }
 ];
 
 // Init the object loader
@@ -88,10 +105,10 @@ var loader = new THREE.GLTFLoader();
 
 loader.load(
   MODEL_PATH,
-  function (gltf) {
+  function(gltf) {
     theModel = gltf.scene;
 
-    theModel.traverse((o) => {
+    theModel.traverse(o => {
       if (o.isMesh) {
         o.castShadow = true;
         o.receiveShadow = true;
@@ -120,14 +137,14 @@ loader.load(
     scene.add(theModel);
   },
   undefined,
-  function (error) {
+  function(error) {
     console.error(error);
   }
 );
 
 // Function - Add the textures to the models
 function initColor(parent, type, mtl) {
-  parent.traverse((o) => {
+  parent.traverse(o => {
     if (o.isMesh) {
       if (o.name.includes(type)) {
         o.material = mtl;
@@ -156,7 +173,7 @@ var floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
 var floorMaterial = new THREE.MeshPhongMaterial({
   color: 0xeeeeee,
   // color: 0xffffff,
-  shininess: 0,
+  shininess: 0
 });
 
 var floor = new THREE.Mesh(floorGeometry, floorMaterial);
@@ -263,12 +280,12 @@ function selectSwatch(e) {
 
     new_mtl = new THREE.MeshPhongMaterial({
       map: txt,
-      shininess: color.shininess ? color.shininess : 10,
+      shininess: color.shininess ? color.shininess : 10
     });
   } else {
     new_mtl = new THREE.MeshPhongMaterial({
       color: parseInt("0x" + color.color),
-      shininess: color.shininess ? color.shininess : 10,
+      shininess: color.shininess ? color.shininess : 10
     });
   }
   console.log(theModel, activeOption, new_mtl);
@@ -276,7 +293,7 @@ function selectSwatch(e) {
 }
 
 function setMaterial(parent, type, mtl) {
-  parent.traverse((o) => {
+  parent.traverse(o => {
     if (o.isMesh && o.nameID != null) {
       if (o.nameID == type) {
         o.material = mtl;
